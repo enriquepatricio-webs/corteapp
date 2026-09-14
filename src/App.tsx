@@ -1006,8 +1006,8 @@ export function App() {
           rel="noopener noreferrer"
           aria-label="Contactar con CorteApp por WhatsApp"
         >
-          <MessageCircle size={23} />
-          <span>Hablemos</span>
+          <img src="/brand/whatsapp.svg" width="23" height="23" alt="" />
+          <span>WhatsApp</span>
         </a>
       </aside>
     </MotionConfig>
