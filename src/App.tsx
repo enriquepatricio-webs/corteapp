@@ -28,6 +28,7 @@ import {
   Layers3,
   Database,
   Mail,
+  FileSpreadsheet,
   Zap,
   Users,
   LockKeyhole,
