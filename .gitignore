@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.prerender/
+.vercel/
+.env*
+!.env.example
+.DS_Store
+*.tsbuildinfo
+# Original client captures stay local; only reviewed assets go into public/projects.
+aenogen-cuatro-paginas-alta-calidad/
+dashboards-alta-calidad/
+dorado-acceso-alta-calidad/
+odin-venta-nueva-alta-calidad/
