@@ -16,3 +16,7 @@ Fecha: 14 de septiembre de 2026.
 - Fuentes locales; sin etiquetas publicitarias ni analítica.
 
 Las pruebas comprueban el envío hacia WhatsApp y el enlace de diagnóstico. No completan reservas reales ni evalúan sistemas externos que pertenecen a CorteApp.
+
+## Ampliación de imágenes
+
+Se añadieron cuatro capturas de apoyo en las soluciones y dos vistas móviles reales. Las seis imágenes se abren en un diálogo ampliable y se cierran con Escape. Revisión específica a 320, 390, 768, 1024 y 1440 px: sin desbordamiento horizontal, imágenes cargadas y sin errores de ejecución ni incidencias en la comprobación automática de accesibilidad de los bloques nuevos.

@@ -17,3 +17,7 @@ El diseño de tarjetas, pestañas animadas, navegación, galería y formulario s
 El logo original procede de corteapp.es/brand/. La tipografía Space Grotesk y Newsreader se sirve localmente con Fontsource. Las capturas de Aenogen y Edisol proceden de los archivos aportados. La captura de operaciones de Dorado procede de la web pública de CorteApp; la carpeta aportada solo mostraba el acceso.
 
 Los originales con nombres, teléfonos, DNI o direcciones de clientes no se publican ni se incluyen en Git. Los indicadores presentes en capturas se identifican como datos del sistema, no como promesas comerciales.
+
+## Imágenes de apoyo
+
+Las cuatro tarjetas de soluciones incluyen capturas ampliables. El tablero de oportunidades de Aenogen procede de la web pública de CorteApp y contiene datos de ejemplo. Las vistas móviles de Edisol y Aenogen proceden de las capturas aportadas y se publican optimizadas en WebP. El bloque de dispositivos muestra estas aplicaciones reales, sin recreaciones generadas.

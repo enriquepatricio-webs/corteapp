@@ -22,21 +22,20 @@ import {
   MessageCircle,
   CalendarDays,
   Clock3,
-  ShieldCheck,
   Workflow,
   PanelsTopLeft,
   ChartNoAxesCombined,
   Layers3,
   Database,
   Mail,
-  FileSpreadsheet,
   Zap,
   Users,
   LockKeyhole,
   Maximize2,
   Code2,
   CheckCheck,
-  MousePointer2,
+  Monitor,
+  Smartphone,
 } from "lucide-react";
 import { BlurFade } from "./components/ui/blur-fade";
 import { BorderBeam } from "./components/ui/border-beam";
@@ -334,6 +333,68 @@ function ProjectShowcase() {
     </>
   );
 }
+function SupportingImage({
+  src,
+  alt,
+  label,
+  className = "",
+  mobile = false,
+}: {
+  src: string;
+  alt: string;
+  label: string;
+  className?: string;
+  mobile?: boolean;
+}) {
+  const dialog = useRef<HTMLDialogElement>(null);
+  return (
+    <figure className={`support-figure ${className}`}>
+      <button
+        type="button"
+        className="support-thumbnail"
+        onClick={() => dialog.current?.showModal()}
+        aria-label={`Ampliar: ${label}`}
+      >
+        <img
+          src={src}
+          alt={alt}
+          width={mobile ? 1290 : 1920}
+          height={mobile ? 2796 : 1080}
+          loading="lazy"
+          decoding="async"
+        />
+        <span className="support-zoom" aria-hidden="true">
+          <Maximize2 size={15} />
+        </span>
+      </button>
+      <figcaption>
+        {label}
+        <span>Aplicación real</span>
+      </figcaption>
+      <dialog
+        ref={dialog}
+        className={`image-dialog ${mobile ? "support-dialog-mobile" : ""}`}
+        aria-label={label}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) dialog.current?.close();
+        }}
+      >
+        <div className="dialog-bar">
+          <strong>{label}</strong>
+          <button
+            type="button"
+            onClick={() => dialog.current?.close()}
+            aria-label="Cerrar imagen"
+          >
+            <X />
+          </button>
+        </div>
+        <img src={src} alt={alt} loading="lazy" />
+      </dialog>
+    </figure>
+  );
+}
+
 function ContactForm() {
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -595,8 +656,8 @@ export function App() {
                 </p>
               </div>
             </Reveal>
-            <div className="bento-grid">
-              <Reveal className="bento-card crm-card">
+            <div className="bento-grid visual-bento">
+              <Reveal className="bento-card crm-card visual-card">
                 <div className="card-icon">
                   <Users size={23} />
                 </div>
@@ -609,42 +670,13 @@ export function App() {
                   Clientes, oportunidades y seguimiento comercial. Organizados
                   según tu forma de vender.
                 </p>
-                <div className="mini-kanban" aria-hidden="true">
-                  <div>
-                    <span>
-                      OPORTUNIDADES <b>03</b>
-                    </span>
-                    <div className="kanban-item">
-                      <i className="kanban-dot" />
-                      <strong>Nuevo contacto</strong>
-                      <span>Primera conversación</span>
-                      <div className="kanban-bottom">
-                        <span className="avatar">AC</span>
-                        <span>Comercial</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <span>
-                      EN SEGUIMIENTO <b>02</b>
-                    </span>
-                    <div className="kanban-item active">
-                      <i className="kanban-dot blue" />
-                      <strong>Propuesta enviada</strong>
-                      <span>Siguiente paso definido</span>
-                      <div className="kanban-bottom">
-                        <span className="avatar blue-avatar">MG</span>
-                        <span>Seguimiento</span>
-                      </div>
-                    </div>
-                  </div>
-                  <MousePointer2 className="kanban-cursor" size={26} />
-                </div>
-                <span className="illustration-label">
-                  Ejemplo de flujo comercial
-                </span>
+                <SupportingImage
+                  src="/projects/aenogen-crm.webp"
+                  alt="CRM de Aenogen: tablero de oportunidades por estado, prioridad y siguiente acción. Datos de ejemplo."
+                  label="Aenogen · Gestión de oportunidades"
+                />
               </Reveal>
-              <Reveal className="bento-card automation-card">
+              <Reveal className="bento-card automation-card visual-card">
                 <div className="card-icon">
                   <Workflow size={23} />
                 </div>
@@ -654,89 +686,52 @@ export function App() {
                   Tu equipo no tiene por qué.
                 </h3>
                 <p>
-                  Conectamos pasos, avisos y aprobaciones para que el trabajo
-                  avance sin perseguirlo.
+                  Conectamos pasos, avisos y aprobaciones. Y hacemos visible el
+                  impacto de las automatizaciones.
                 </p>
-                <div className="automation-flow" aria-hidden="true">
-                  <span>
-                    <Mail size={23} />
-                  </span>
-                  <div className="flow-line" />
-                  <span className="flow-center">
-                    <img
-                      src="/brand/logo-mark.svg"
-                      alt=""
-                      width="27"
-                      height="27"
-                    />
-                  </span>
-                  <div className="flow-line" />
-                  <span>
-                    <CheckCheck size={24} />
-                  </span>
-                </div>
-                <div className="flow-labels">
-                  <span>Entrada</span>
-                  <span>Automatización</span>
-                  <span>Completado</span>
-                </div>
+                <SupportingImage
+                  src="/projects/edisol.webp"
+                  alt="Panel de Edisol con seguimiento de robots, actividad y estimaciones de ahorro operativo."
+                  label="Edisol · Control de automatizaciones"
+                />
               </Reveal>
-              <Reveal className="bento-card software-card">
-                <div>
-                  <div className="card-icon">
-                    <PanelsTopLeft size={23} />
-                  </div>
-                  <h3>
-                    Tu operación.
-                    <br />
-                    Una sola plataforma.
-                  </h3>
-                  <p>
-                    Aplicaciones internas para coordinar personas, procesos y
-                    datos con una visión compartida.
-                  </p>
+              <Reveal className="bento-card software-card visual-card">
+                <div className="card-icon">
+                  <PanelsTopLeft size={23} />
                 </div>
-                <div className="module-stack" aria-hidden="true">
-                  <div>
-                    <Layers3 size={18} />
-                    <span>Operaciones</span>
-                    <Check size={15} />
-                  </div>
-                  <div>
-                    <ShieldCheck size={18} />
-                    <span>Roles y permisos</span>
-                    <Check size={15} />
-                  </div>
-                  <div>
-                    <ChartNoAxesCombined size={18} />
-                    <span>Datos y reporting</span>
-                    <Check size={15} />
-                  </div>
-                </div>
+                <h3>
+                  Tu operación.
+                  <br />
+                  Una sola plataforma.
+                </h3>
+                <p>
+                  Aplicaciones internas para coordinar personas, procesos y
+                  datos con una visión compartida.
+                </p>
+                <SupportingImage
+                  src="/projects/dorado-operaciones.webp"
+                  alt="Vista de operaciones de Dorado Telecom con control de vehículos, prevención y obras."
+                  label="Dorado Telecom · Gestión operativa"
+                />
               </Reveal>
-              <Reveal className="bento-card integration-card">
+              <Reveal className="bento-card integration-card visual-card">
                 <div className="card-icon">
                   <Database size={23} />
                 </div>
-                <h3>Conecta lo que ya utilizas.</h3>
+                <h3>
+                  Conecta tus herramientas.
+                  <br />
+                  Dale continuidad al trabajo.
+                </h3>
                 <p>
-                  Tu ERP, tus hojas y tus aplicaciones pueden formar parte del
-                  mismo proceso.
+                  Datos, campañas y conversaciones dentro del mismo proceso,
+                  conectado con tu forma de trabajar.
                 </p>
-                <div className="integration-pills">
-                  <span>
-                    <FileSpreadsheet size={16} /> Excel
-                  </span>
-                  <span>
-                    <Database size={16} /> ERP
-                  </span>
-                  <span>
-                    <Mail size={16} /> Correo
-                  </span>
-                  <span>
-                    <Code2 size={16} /> API
-                  </span>
-                </div>
+                <SupportingImage
+                  src="/projects/aenogen.webp"
+                  alt="Módulo de campañas de Aenogen con selección de audiencia, contenido y tipo de conversación."
+                  label="Aenogen · Campañas y comunicación"
+                />
               </Reveal>
             </div>
             <div className="solutions-bottom">
@@ -822,6 +817,62 @@ export function App() {
                 duration={14}
                 colorFrom="#155eef"
                 colorTo="#5ec5fd"
+              />
+            </div>
+          </div>
+        </section>
+        <section className="device-section" aria-labelledby="device-heading">
+          <div className="container device-grid">
+            <div className="device-copy">
+              <Eyebrow>TU EQUIPO NO SIEMPRE ESTÁ EN SU MESA</Eyebrow>
+              <h2 id="device-heading">
+                En la oficina.
+                <br />
+                <em>Y donde haga falta.</em>
+              </h2>
+              <p>
+                El mismo negocio, distintas formas de trabajar. Diseñamos cada
+                pantalla para el dispositivo desde el que se utiliza.
+              </p>
+              <div className="device-details">
+                <div>
+                  <Monitor size={20} />
+                  <span>
+                    <strong>Una visión completa en escritorio</strong>
+                    <small>
+                      Clientes, procesos y datos en un solo entorno.
+                    </small>
+                  </span>
+                </div>
+                <div>
+                  <Smartphone size={20} />
+                  <span>
+                    <strong>Lo que necesitas, también en móvil</strong>
+                    <small>
+                      Pantallas adaptadas para consultar y trabajar.
+                    </small>
+                  </span>
+                </div>
+              </div>
+              <a className="text-link" href="#contacto">
+                Hablemos de cómo trabaja tu equipo <ArrowUpRight size={17} />
+              </a>
+            </div>
+            <div className="device-visual">
+              <div className="device-halo" aria-hidden="true" />
+              <SupportingImage
+                src="/projects/edisol-mobile.webp"
+                alt="Versión móvil real del panel de Edisol: filtros de periodo e indicadores de ahorro."
+                label="Edisol · Dashboard móvil"
+                className="phone-preview phone-edisol"
+                mobile
+              />
+              <SupportingImage
+                src="/projects/aenogen-mobile.webp"
+                alt="Versión móvil real de Aenogen: configuración de una campaña paso a paso."
+                label="Aenogen · CRM móvil"
+                className="phone-preview phone-aenogen"
+                mobile
               />
             </div>
           </div>
