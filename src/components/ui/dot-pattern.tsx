@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import React, { useEffect, useId, useRef, useState } from "react"
-import { motion } from "motion/react"
+import React, { useEffect, useId, useRef, useState } from "react";
+import { motion } from "motion/react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 /**
  *  DotPattern Component Props
@@ -19,16 +19,16 @@ import { cn } from "@/lib/utils"
  * @param {boolean} [glow=false] - Whether dots should have a glowing animation effect
  */
 interface DotPatternProps extends React.SVGProps<SVGSVGElement> {
-  width?: number
-  height?: number
-  x?: number
-  y?: number
-  cx?: number
-  cy?: number
-  cr?: number
-  className?: string
-  glow?: boolean
-  [key: string]: unknown
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+  cx?: number;
+  cy?: number;
+  cr?: number;
+  className?: string;
+  glow?: boolean;
+  [key: string]: unknown;
 }
 
 /**
@@ -73,29 +73,50 @@ export function DotPattern({
   glow = false,
   ...props
 }: DotPatternProps) {
-  const id = useId()
-  const containerRef = useRef<SVGSVGElement>(null)
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  const id = useId();
+  const containerRef = useRef<SVGSVGElement>(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
-        const { width, height } = containerRef.current.getBoundingClientRect()
-        setDimensions({ width, height })
+        const { width, height } = containerRef.current.getBoundingClientRect();
+        setDimensions({ width, height });
       }
-    }
+    };
 
-    updateDimensions()
-    window.addEventListener("resize", updateDimensions)
-    return () => window.removeEventListener("resize", updateDimensions)
-  }, [])
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
 
   // The non-animated variant uses one native SVG pattern, avoiding hundreds of motion nodes.
   if (!glow) {
-    return <svg ref={containerRef} aria-hidden="true" className={cn("pointer-events-none absolute inset-0 h-full w-full text-neutral-400/80", className)} {...props}>
-      <defs><pattern id={id} x={x} y={y} width={width} height={height} patternUnits="userSpaceOnUse"><circle cx={cx} cy={cy} r={cr} fill="currentColor" /></pattern></defs>
-      <rect width="100%" height="100%" fill={`url(#${id})`} />
-    </svg>
+    return (
+      <svg
+        ref={containerRef}
+        aria-hidden="true"
+        className={cn(
+          "pointer-events-none absolute inset-0 h-full w-full text-neutral-400/80",
+          className,
+        )}
+        {...props}
+      >
+        <defs>
+          <pattern
+            id={id}
+            x={x}
+            y={y}
+            width={width}
+            height={height}
+            patternUnits="userSpaceOnUse"
+          >
+            <circle cx={cx} cy={cy} r={cr} fill="currentColor" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill={`url(#${id})`} />
+      </svg>
+    );
   }
 
   const dots = Array.from(
@@ -105,16 +126,16 @@ export function DotPattern({
         Math.ceil(dimensions.height / height),
     },
     (_, i) => {
-      const col = i % Math.ceil(dimensions.width / width)
-      const row = Math.floor(i / Math.ceil(dimensions.width / width))
+      const col = i % Math.ceil(dimensions.width / width);
+      const row = Math.floor(i / Math.ceil(dimensions.width / width));
       return {
         x: col * width + cx + x,
         y: row * height + cy + y,
         delay: Math.random() * 5,
         duration: Math.random() * 3 + 2,
-      }
-    }
-  )
+      };
+    },
+  );
 
   return (
     <svg
@@ -122,7 +143,7 @@ export function DotPattern({
       aria-hidden="true"
       className={cn(
         "pointer-events-none absolute inset-0 h-full w-full text-neutral-400/80",
-        className
+        className,
       )}
       {...props}
     >
@@ -162,5 +183,5 @@ export function DotPattern({
         />
       ))}
     </svg>
-  )
+  );
 }

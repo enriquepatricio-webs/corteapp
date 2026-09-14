@@ -1,0 +1,11 @@
+.git
+.env*
+node_modules
+dist
+.prerender
+*.tsbuildinfo
+.DS_Store
+aenogen-cuatro-paginas-alta-calidad
+dashboards-alta-calidad
+dorado-acceso-alta-calidad
+odin-venta-nueva-alta-calidad
