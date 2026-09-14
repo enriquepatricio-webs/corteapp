@@ -10,6 +10,7 @@ import {
   motion,
   MotionConfig,
   useReducedMotion,
+  useScroll,
 } from "motion/react";
 import {
   ArrowRight,
@@ -43,6 +44,8 @@ import { BorderBeam } from "./components/ui/border-beam";
 import { DotPattern } from "./components/ui/dot-pattern";
 import { Marquee } from "./components/ui/marquee";
 import { ShimmerButton } from "./components/ui/shimmer-button";
+import { HeroFilm } from "./components/hero-film";
+import { ParallaxBackdrop } from "./components/parallax-backdrop";
 import { contact, whatsappUrl } from "./config";
 
 function Brand({ light = false }: { light?: boolean }) {
@@ -86,7 +89,7 @@ function Reveal({
     <BlurFade
       initial={false}
       inView
-      blur="2px"
+      variant={{ hidden: { y: 12 }, visible: { y: 0 } }}
       duration={0.5}
       className={className}
     >
@@ -481,12 +484,18 @@ function ContactForm() {
 export function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
   return (
     <MotionConfig reducedMotion="user">
       <a className="skip-link" href="#main">
         Saltar al contenido
       </a>
       <header className="site-header">
+        <motion.div
+          className="reading-progress"
+          style={{ scaleX: scrollYProgress }}
+          aria-hidden="true"
+        />
         <div className="container nav">
           <Brand />
           <nav className="desktop-nav" aria-label="Navegación principal">
@@ -584,15 +593,7 @@ export function App() {
                   </span>
                   <span className="live-label">Aplicación real</span>
                 </div>
-                <img
-                  className="hero-screen"
-                  src="/projects/edisol.webp"
-                  width="1920"
-                  height="1080"
-                  alt="Software de Edisol desarrollado por CorteApp: dashboard de automatizaciones con indicadores de actividad y ahorro estimado."
-                  fetchPriority="high"
-                />
-                <div className="hero-screen-fade" />
+                <HeroFilm />
                 <BorderBeam
                   size={230}
                   duration={12}
@@ -644,7 +645,7 @@ export function App() {
             <Reveal>
               <div className="section-heading split-heading">
                 <div>
-                  <Eyebrow>TECNOLOGÍA QUE ENCAJA CONTIGO</Eyebrow>
+                  <Eyebrow>01 / TECNOLOGÍA QUE ENCAJA CONTIGO</Eyebrow>
                   <h2>
                     Tu negocio ha crecido.
                     <br />
@@ -747,7 +748,7 @@ export function App() {
           <div className="container">
             <Reveal>
               <div className="section-heading">
-                <Eyebrow>DEL PROBLEMA A LA PANTALLA</Eyebrow>
+                <Eyebrow>02 / DEL PROBLEMA A LA PANTALLA</Eyebrow>
                 <h2>
                   Menos promesas.
                   <br />
@@ -767,9 +768,10 @@ export function App() {
           </div>
         </section>
         <section className="outcome-section">
+          <ParallaxBackdrop />
           <div className="container outcome-inner">
             <div>
-              <Eyebrow dark>HECHO PARA TU DÍA A DÍA</Eyebrow>
+              <Eyebrow dark>03 / HECHO PARA TU DÍA A DÍA</Eyebrow>
               <h2>
                 De herramientas dispersas
                 <br />a un equipo <em>conectado.</em>
@@ -825,7 +827,7 @@ export function App() {
         <section className="device-section" aria-labelledby="device-heading">
           <div className="container device-grid">
             <div className="device-copy">
-              <Eyebrow>TU EQUIPO NO SIEMPRE ESTÁ EN SU MESA</Eyebrow>
+              <Eyebrow>04 / TU EQUIPO, DENTRO Y FUERA DE LA OFICINA</Eyebrow>
               <h2 id="device-heading">
                 En la oficina.
                 <br />
@@ -882,7 +884,7 @@ export function App() {
           <div className="container">
             <Reveal>
               <div className="section-heading centered">
-                <Eyebrow>CLARIDAD DESDE EL PRIMER PASO</Eyebrow>
+                <Eyebrow>05 / CLARIDAD DESDE EL PRIMER PASO</Eyebrow>
                 <h2>
                   De «necesitamos algo mejor»
                   <br />
@@ -957,7 +959,7 @@ export function App() {
         <section className="section faq-section">
           <div className="container faq-grid">
             <div>
-              <Eyebrow>ANTES DE DAR EL PASO</Eyebrow>
+              <Eyebrow>06 / ANTES DE DAR EL PASO</Eyebrow>
               <h2>
                 Buenas preguntas.
                 <br />
@@ -994,7 +996,7 @@ export function App() {
         <section className="contact-section" id="contacto">
           <div className="container contact-grid">
             <div className="contact-copy">
-              <Eyebrow>EL SIGUIENTE PASO ES UNA CONVERSACIÓN</Eyebrow>
+              <Eyebrow>07 / EL SIGUIENTE PASO ES UNA CONVERSACIÓN</Eyebrow>
               <h2>
                 Tu próximo salto
                 <br />
